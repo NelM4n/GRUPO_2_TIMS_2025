@@ -1,6 +1,4 @@
-# *(categoria do robô)*
-
-Este é um template para organização de projetos de robôs *(categoria do robô)*. Use este template como base para organizar seu projeto. Modifique os README para atender aos requisitos.
+# Robô Minu-sumô
 
 ## Estrutura do Projeto
 
@@ -8,7 +6,7 @@ Este template fornece uma estrutura organizada para desenvolvimento do robô *(c
 
 ## Organização dos Diretórios
 ```
-CATEGORIA_DO_ROBÔ_ANO/
+MINI_SUMO_2025/
 ├── code/                       # Implementação da programação
 │
 ├── docs/                       # Documentação do código

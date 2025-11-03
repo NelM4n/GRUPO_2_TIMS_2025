@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "Mini_sumo_esp32",
+			"path": "../Documentos/PlatformIO/Projects/Mini_sumo_esp32"
+		}
+	],
+	"settings": {}
+}
