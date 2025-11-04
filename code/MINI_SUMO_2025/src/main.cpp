@@ -171,8 +171,10 @@ void processGamepad(ControllerPtr ctl) {
 
   //== LEFT JOYSTICK - UP ==//
   if (ctl->axisY() <= -25) {
-    // code for when left joystick is pushed up
-    }
+    
+    int val = map(ctl->axisY(),-9,-510,0,255);
+    digitalWrite(18, val);
+  }
 
   //== LEFT JOYSTICK - DOWN ==//
   if (ctl->axisY() >= 25) {
@@ -220,7 +222,11 @@ void processControllers() {
 }
 
 // Arduino setup function. Runs in CPU 1
+
 void setup() {
+
+  pinMode(18, OUTPUT);
+
   Serial.begin(115200);
   Serial.printf("Firmware: %s\n", BP32.firmwareVersion());
   const uint8_t* addr = BP32.localBdAddress();
@@ -246,6 +252,7 @@ void setup() {
 
 // Arduino loop function. Runs in CPU 1.
 void loop() {
+  
   // This call fetches all the controllers' data.
   // Call this function in your main loop.
   bool dataUpdated = BP32.update();
