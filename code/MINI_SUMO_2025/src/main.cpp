@@ -1,4 +1,15 @@
 #include <Bluepad32.h>
+#include<Arduino.h>
+
+int motor1Pin1 = 27; 
+int motor1Pin2 = 26; 
+int enable1Pin = 14; 
+
+const int freq = 30000;
+const int pwmChannel = 0;
+const int resolution = 8;
+int dutyCycle = 200;
+
 
 ControllerPtr myControllers[BP32_MAX_GAMEPADS];
 
@@ -8,6 +19,7 @@ void onConnectedController(ControllerPtr ctl) {
   bool foundEmptySlot = false;
   for (int i = 0; i < BP32_MAX_GAMEPADS; i++) {
     if (myControllers[i] == nullptr) {
+      digitalWrite(2,HIGH);
       Serial.printf("CALLBACK: Controller is connected, index=%d\n", i);
       // Additionally, you can get certain gamepad properties like:
       // Model, VID, PID, BTAddr, flags, etc.
@@ -147,7 +159,13 @@ void processGamepad(ControllerPtr ctl) {
 
   //== PS4 R2 trigger button = 0x0080 ==//
   if (ctl->buttons() == 0x0080) {
-    // code for when R2 button is pushed
+    Serial.println("Moving Forward");
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, HIGH);
+  }
+  else{
+    digitalWrite(motor1Pin1,LOW);
+    digitalWrite(motor1Pin2, LOW);
   }
   if (ctl->buttons() != 0x0080) {
     // code for when R2 button is released
@@ -171,9 +189,7 @@ void processGamepad(ControllerPtr ctl) {
 
   //== LEFT JOYSTICK - UP ==//
   if (ctl->axisY() <= -25) {
-    
-    int val = map(ctl->axisY(),-9,-510,0,255);
-    digitalWrite(18, val);
+  
   }
 
   //== LEFT JOYSTICK - DOWN ==//
@@ -226,6 +242,9 @@ void processControllers() {
 void setup() {
 
   pinMode(18, OUTPUT);
+  pinMode(motor1Pin1, OUTPUT);
+  pinMode(motor1Pin2, OUTPUT);
+  pinMode(enable1Pin, OUTPUT);
 
   Serial.begin(115200);
   Serial.printf("Firmware: %s\n", BP32.firmwareVersion());
