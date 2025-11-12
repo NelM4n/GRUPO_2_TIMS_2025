@@ -1,15 +1,13 @@
 #include <Bluepad32.h>
 #include<Arduino.h>
 
-int motor1Pin1 = 27; 
-int motor1Pin2 = 26; 
-int enable1Pin = 14; 
-
-const int freq = 30000;
-const int pwmChannel = 0;
-const int resolution = 8;
-int dutyCycle = 200;
-
+#define AIN1 13
+#define BIN1 12
+#define AIN2 14
+#define BIN2 27
+#define PWMA 26
+#define PWMB 25
+#define STBY 33
 
 ControllerPtr myControllers[BP32_MAX_GAMEPADS];
 
@@ -19,7 +17,6 @@ void onConnectedController(ControllerPtr ctl) {
   bool foundEmptySlot = false;
   for (int i = 0; i < BP32_MAX_GAMEPADS; i++) {
     if (myControllers[i] == nullptr) {
-      digitalWrite(2,HIGH);
       Serial.printf("CALLBACK: Controller is connected, index=%d\n", i);
       // Additionally, you can get certain gamepad properties like:
       // Model, VID, PID, BTAddr, flags, etc.
@@ -27,6 +24,7 @@ void onConnectedController(ControllerPtr ctl) {
       Serial.printf("Controller model: %s, VID=0x%04x, PID=0x%04x\n", ctl->getModelName().c_str(), properties.vendor_id, properties.product_id);
       myControllers[i] = ctl;
       foundEmptySlot = true;
+      digitalWrite(2,HIGH);
       break;
       }
     }
@@ -159,13 +157,13 @@ void processGamepad(ControllerPtr ctl) {
 
   //== PS4 R2 trigger button = 0x0080 ==//
   if (ctl->buttons() == 0x0080) {
-    Serial.println("Moving Forward");
-  digitalWrite(motor1Pin1, LOW);
-  digitalWrite(motor1Pin2, HIGH);
+  digitalWrite(AIN1, HIGH);
+  digitalWrite(AIN2, LOW);
+  analogWrite(PWMA, 255);
   }
   else{
-    digitalWrite(motor1Pin1,LOW);
-    digitalWrite(motor1Pin2, LOW);
+  analogWrite(PWMA, 0);
+  analogWrite(PWMB, 0);
   }
   if (ctl->buttons() != 0x0080) {
     // code for when R2 button is released
@@ -241,12 +239,19 @@ void processControllers() {
 
 void setup() {
 
-  pinMode(18, OUTPUT);
-  pinMode(motor1Pin1, OUTPUT);
-  pinMode(motor1Pin2, OUTPUT);
-  pinMode(enable1Pin, OUTPUT);
-
   Serial.begin(115200);
+  pinMode(AIN1, OUTPUT);
+  pinMode(AIN2, OUTPUT);
+  pinMode(PWMA, OUTPUT);
+  pinMode(BIN1, OUTPUT);
+  pinMode(BIN2, OUTPUT);
+  pinMode(PWMB, OUTPUT);
+  pinMode(STBY, OUTPUT);
+
+  // Enable the motor driver by setting STBY HIGH
+  digitalWrite(STBY, HIGH);
+
+
   Serial.printf("Firmware: %s\n", BP32.firmwareVersion());
   const uint8_t* addr = BP32.localBdAddress();
   Serial.printf("BD Addr: %2X:%2X:%2X:%2X:%2X:%2X\n", addr[0], addr[1], addr[2], addr[3], addr[4], addr[5]);
