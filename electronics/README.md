@@ -7,6 +7,8 @@ Este diretório deve conter todos os arquivos relacionados ao projeto eletrônic
 - Lista de componentes (BOM)
 - Datasheets dos componentes
 - Diagramas de conexão
+- ![Diagramas de conexao dia 14/11](electronics/img/Conexoes_comp_eletronicos.png)
+- https://app.cirkitdesigner.com/project/51768e7f-3658-4a64-9f8b-6be969e59565
 - Configurações de hardware
 
 ## Estrutura
