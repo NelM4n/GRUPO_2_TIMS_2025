@@ -4,7 +4,7 @@ Este diretório deve conter todos os arquivos relacionados ao projeto mecânico 
 
 - Arquivos CAD 3D
 - Desenhos técnicos
-  ![Imagem do Chassi em vista direita(tampa aberta)](GRUPO_2_TIMS_2025/mechanics/img/Print_ChassiV3_.jpeg)
+  ![Imagem do Chassi em vista direita(tampa aberta)](mechanics/img/Print_ChassiV3_.jpeg)
 - Arquivos para impressão 3D
 - Listas de materiais
 - Guias de montagem mecânica
