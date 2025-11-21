@@ -157,16 +157,11 @@ void processGamepad(ControllerPtr ctl) {
 
   //== PS4 R2 trigger button = 0x0080 ==//
   if (ctl->buttons() == 0x0080) {
-  digitalWrite(AIN1, HIGH);
-  digitalWrite(AIN2, LOW);
-  analogWrite(PWMA, 255);
-  }
-  else{
-  analogWrite(PWMA, 0);
-  analogWrite(PWMB, 0);
-  }
+    frente();
+ 
   if (ctl->buttons() != 0x0080) {
     // code for when R2 button is released
+     parado();
   }
 
   //== PS4 L1 trigger button = 0x0010 ==//
@@ -179,10 +174,11 @@ void processGamepad(ControllerPtr ctl) {
 
   //== PS4 L2 trigger button = 0x0040 ==//
   if (ctl->buttons() == 0x0040) {
-    // code for when L2 button is pushed
+    re();
   }
   if (ctl->buttons() != 0x0040) {
     // code for when L2 button is released
+    parado();
   }
 
   //== LEFT JOYSTICK - UP ==//
@@ -198,11 +194,13 @@ void processGamepad(ControllerPtr ctl) {
   //== LEFT JOYSTICK - LEFT ==//
   if (ctl->axisX() <= -25) {
     // code for when left joystick is pushed left
+    esquerda();
   }
 
   //== LEFT JOYSTICK - RIGHT ==//
   if (ctl->axisX() >= 25) {
     // code for when left joystick is pushed right
+    direita();
   }
 
   //== LEFT JOYSTICK DEADZONE ==//
@@ -235,8 +233,6 @@ void processControllers() {
   }
 }
 
-// Arduino setup function. Runs in CPU 1
-
 void setup() {
 
   Serial.begin(115200);
@@ -250,8 +246,7 @@ void setup() {
 
   // Enable the motor driver by setting STBY HIGH
   digitalWrite(STBY, HIGH);
-
-
+    
   Serial.printf("Firmware: %s\n", BP32.firmwareVersion());
   const uint8_t* addr = BP32.localBdAddress();
   Serial.printf("BD Addr: %2X:%2X:%2X:%2X:%2X:%2X\n", addr[0], addr[1], addr[2], addr[3], addr[4], addr[5]);
@@ -274,7 +269,52 @@ void setup() {
   BP32.enableVirtualDevice(false);
 }
 
-// Arduino loop function. Runs in CPU 1.
+void frente() {
+    Serial.print("Indo pra frente");
+    analogWrite(PWMA, 255);
+    analogWrite(PWMB, 255);
+    digitalWrite(AIN1, HIGH);
+    digitalWrite(AIN2, LOW);
+    digitalWrite(BIN1, HIGH);
+    digitalWrite(BIN2, LOW);  
+  }
+  void parado() {
+    Serial.print("Parado");
+    digitalWrite(AIN1, LOW);
+    digitalWrite(AIN2, LOW);
+    digitalWrite(BIN1, LOW);
+    digitalWrite(BIN2, LOW);  
+  }
+  void esquerda(){
+    Serial.print("Virando pra esquerda");
+    analogWrite(PWMA, 255);
+    analogWrite(PWMB, 255);
+    digitalWrite(AIN1, LOW);
+    digitalWrite(AIN2, HIGH);
+    digitalWrite(BIN1, HIGH);
+    digitalWrite(BIN2, LOW); 
+  }
+
+  void direita(){
+    Serial.print("Virando pra direita");
+    analogWrite(PWMA, 255);
+    analogWrite(PWMB, 255);
+    digitalWrite(AIN1, HIGH);
+    digitalWrite(AIN2, LOW);
+    digitalWrite(BIN1, LOW);
+    digitalWrite(BIN2, HIGH); 
+  }
+
+  void re(){
+    Serial.print("Indo pra trás");
+    analogWrite(PWMA, 255);
+    analogWrite(PWMB, 255);
+    digitalWrite(AIN1, HIGH);
+    digitalWrite(AIN2, LOW);
+    digitalWrite(BIN1, LOW);
+    digitalWrite(BIN2, HIGH); 
+  }
+
 void loop() {
   
   // This call fetches all the controllers' data.
