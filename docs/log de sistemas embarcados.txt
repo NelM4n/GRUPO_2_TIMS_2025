@@ -1,5 +1,0 @@
-Dia 09/11/2025
-
-Após duas semanas, a ferramenta escolhida foi a PlatformIO.
-Esta decisão foi tomada mesmo havendo uma certa dificuldade com implementação da biblioteca bluepad32.
-A dificuldade foi superada e o módulo bluetooth está funcionando conforme planejado.
