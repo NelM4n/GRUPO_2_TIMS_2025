@@ -1,18 +1,79 @@
 #include <Bluepad32.h>
 #include<Arduino.h>
-
-#define AIN1 13
-#define BIN1 12
-#define AIN2 14
-#define BIN2 27
-#define PWMA 26
-#define PWMB 25
-#define STBY 33
+#include"funcoes.h"
 
 ControllerPtr myControllers[BP32_MAX_GAMEPADS];
 
 // This callback gets called any time a new gamepad is connected.
 // Up to 4 gamepads can be connected at the same time.
+void onConnectedController(ControllerPtr ctl);
+
+void onDisconnectedController(ControllerPtr ctl);
+
+// ========= SEE CONTROLLER VALUES IN SERIAL MONITOR ========= //
+
+void dumpGamepad(ControllerPtr ctl);
+
+// ========= GAME CONTROLLER ACTIONS SECTION ========= //
+
+void processGamepad(ControllerPtr ctl);
+
+void processControllers();
+
+void setup() {
+
+  Serial.begin(115200);
+  pinMode(AIN1, OUTPUT);
+  pinMode(AIN2, OUTPUT);
+  pinMode(PWMA, OUTPUT);
+  pinMode(BIN1, OUTPUT);
+  pinMode(BIN2, OUTPUT);
+  pinMode(PWMB, OUTPUT);
+  pinMode(STBY, OUTPUT);
+
+  // Enable the motor driver by setting STBY HIGH
+  digitalWrite(STBY, HIGH);
+    
+  Serial.printf("Firmware: %s\n", BP32.firmwareVersion());
+  const uint8_t* addr = BP32.localBdAddress();
+  Serial.printf("BD Addr: %2X:%2X:%2X:%2X:%2X:%2X\n", addr[0], addr[1], addr[2], addr[3], addr[4], addr[5]);
+
+  // Setup the Bluepad32 callbacks
+  BP32.setup(&onConnectedController, &onDisconnectedController);
+
+  // "forgetBluetoothKeys()" should be called when the user performs
+  // a "device factory reset", or similar.
+  // Calling "forgetBluetoothKeys" in setup() just as an example.
+  // Forgetting Bluetooth keys prevents "paired" gamepads to reconnect.
+  // But it might also fix some connection / re-connection issues.
+  BP32.forgetBluetoothKeys();
+
+  // Enables mouse / touchpad support for gamepads that support them.
+  // When enabled, controllers like DualSense and DualShock4 generate two connected devices:
+  // - First one: the gamepad
+  // - Second one, which is a "virtual device", is a mouse.
+  // By default, it is disabled.
+  BP32.enableVirtualDevice(false);
+}
+
+void loop() {
+  
+  // This call fetches all the controllers' data.
+  // Call this function in your main loop.
+  bool dataUpdated = BP32.update();
+  if (dataUpdated)
+    processControllers();
+
+    // The main loop must have some kind of "yield to lower priority task" event.
+    // Otherwise, the watchdog will get triggered.
+    // If your main loop doesn't have one, just add a simple `vTaskDelay(1)`.
+    // Detailed info here:
+    // https://stackoverflow.com/questions/66278271/task-watchdog-got-triggered-the-tasks-did-not-reset-the-watchdog-in-time
+
+    // vTaskDelay(1);
+  delay(150);
+}
+
 void onConnectedController(ControllerPtr ctl) {
   bool foundEmptySlot = false;
   for (int i = 0; i < BP32_MAX_GAMEPADS; i++) {
@@ -51,8 +112,6 @@ void onDisconnectedController(ControllerPtr ctl) {
     }
 }
 
-// ========= SEE CONTROLLER VALUES IN SERIAL MONITOR ========= //
-
 void dumpGamepad(ControllerPtr ctl) {
   Serial.printf(
   "idx=%d, dpad: 0x%02x, buttons: 0x%04x, axis L: %4d, %4d, axis R: %4d, %4d, brake: %4d, throttle: %4d, "
@@ -76,9 +135,7 @@ void dumpGamepad(ControllerPtr ctl) {
   );
 }
 
-// ========= GAME CONTROLLER ACTIONS SECTION ========= //
-
-void processGamepad(ControllerPtr ctl) {
+void processGamepad(ControllerPtr ctl){
   // There are different ways to query whether a button is pressed.
   // By query each button individually:
   //  a(), b(), x(), y(), l1(), etc...
@@ -158,6 +215,7 @@ void processGamepad(ControllerPtr ctl) {
   //== PS4 R2 trigger button = 0x0080 ==//
   if (ctl->buttons() == 0x0080) {
     frente();
+  }
  
   if (ctl->buttons() != 0x0080) {
     // code for when R2 button is released
@@ -231,104 +289,4 @@ void processControllers() {
       }
     }
   }
-}
-
-void setup() {
-
-  Serial.begin(115200);
-  pinMode(AIN1, OUTPUT);
-  pinMode(AIN2, OUTPUT);
-  pinMode(PWMA, OUTPUT);
-  pinMode(BIN1, OUTPUT);
-  pinMode(BIN2, OUTPUT);
-  pinMode(PWMB, OUTPUT);
-  pinMode(STBY, OUTPUT);
-
-  // Enable the motor driver by setting STBY HIGH
-  digitalWrite(STBY, HIGH);
-    
-  Serial.printf("Firmware: %s\n", BP32.firmwareVersion());
-  const uint8_t* addr = BP32.localBdAddress();
-  Serial.printf("BD Addr: %2X:%2X:%2X:%2X:%2X:%2X\n", addr[0], addr[1], addr[2], addr[3], addr[4], addr[5]);
-
-  // Setup the Bluepad32 callbacks
-  BP32.setup(&onConnectedController, &onDisconnectedController);
-
-  // "forgetBluetoothKeys()" should be called when the user performs
-  // a "device factory reset", or similar.
-  // Calling "forgetBluetoothKeys" in setup() just as an example.
-  // Forgetting Bluetooth keys prevents "paired" gamepads to reconnect.
-  // But it might also fix some connection / re-connection issues.
-  BP32.forgetBluetoothKeys();
-
-  // Enables mouse / touchpad support for gamepads that support them.
-  // When enabled, controllers like DualSense and DualShock4 generate two connected devices:
-  // - First one: the gamepad
-  // - Second one, which is a "virtual device", is a mouse.
-  // By default, it is disabled.
-  BP32.enableVirtualDevice(false);
-}
-
-void frente() {
-    Serial.print("Indo pra frente");
-    analogWrite(PWMA, 255);
-    analogWrite(PWMB, 255);
-    digitalWrite(AIN1, HIGH);
-    digitalWrite(AIN2, LOW);
-    digitalWrite(BIN1, HIGH);
-    digitalWrite(BIN2, LOW);  
-  }
-  void parado() {
-    Serial.print("Parado");
-    digitalWrite(AIN1, LOW);
-    digitalWrite(AIN2, LOW);
-    digitalWrite(BIN1, LOW);
-    digitalWrite(BIN2, LOW);  
-  }
-  void esquerda(){
-    Serial.print("Virando pra esquerda");
-    analogWrite(PWMA, 255);
-    analogWrite(PWMB, 255);
-    digitalWrite(AIN1, LOW);
-    digitalWrite(AIN2, HIGH);
-    digitalWrite(BIN1, HIGH);
-    digitalWrite(BIN2, LOW); 
-  }
-
-  void direita(){
-    Serial.print("Virando pra direita");
-    analogWrite(PWMA, 255);
-    analogWrite(PWMB, 255);
-    digitalWrite(AIN1, HIGH);
-    digitalWrite(AIN2, LOW);
-    digitalWrite(BIN1, LOW);
-    digitalWrite(BIN2, HIGH); 
-  }
-
-  void re(){
-    Serial.print("Indo pra trás");
-    analogWrite(PWMA, 255);
-    analogWrite(PWMB, 255);
-    digitalWrite(AIN1, HIGH);
-    digitalWrite(AIN2, LOW);
-    digitalWrite(BIN1, LOW);
-    digitalWrite(BIN2, HIGH); 
-  }
-
-void loop() {
-  
-  // This call fetches all the controllers' data.
-  // Call this function in your main loop.
-  bool dataUpdated = BP32.update();
-  if (dataUpdated)
-    processControllers();
-
-    // The main loop must have some kind of "yield to lower priority task" event.
-    // Otherwise, the watchdog will get triggered.
-    // If your main loop doesn't have one, just add a simple `vTaskDelay(1)`.
-    // Detailed info here:
-    // https://stackoverflow.com/questions/66278271/task-watchdog-got-triggered-the-tasks-did-not-reset-the-watchdog-in-time
-
-    // vTaskDelay(1);
-  delay(150);
 }
