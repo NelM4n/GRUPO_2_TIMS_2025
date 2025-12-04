@@ -3,7 +3,7 @@
 Este diretório deve conter todos os arquivos relacionados ao projeto eletrônico do robô *(categoria do robô)*, incluindo:
 
 - Esquemáticos eletrônicos
-  ! [Esquematico Eletronico](img/Esquematico Eletronico.png)
+  ![Esquemático Eletrônico](electronics/img/Esquematico%20Eletronico.png)
 - Layout de PCB
 - Lista de componentes (BOM)
   * planilha de componentes eletronicos (https://docs.google.com/spreadsheets/d/1agG4XEwVY7tFlbT6GtZfWE7ugiVqS48p61Cghws9TIE/edit?usp=sharing)
