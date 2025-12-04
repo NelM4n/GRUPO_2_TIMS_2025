@@ -19,7 +19,7 @@ Este diretório deve conter todos os arquivos relacionados ao projeto eletrônic
   
 - Datasheets dos componentes
 - Diagramas de conexão
- ![Diagramas de conexao dia 14/11](img/Conexoes_comp_eletronicos.png)
+ ![Diagramas de conexao dia 14/11](img/circuit_image.png)
 - Link para o diagram no Cirkit Designer IDE (https://app.cirkitdesigner.com/project/8090001e-82be-4ea8-86dd-e02c36172e6e) 
 - Configurações de hardware
 
