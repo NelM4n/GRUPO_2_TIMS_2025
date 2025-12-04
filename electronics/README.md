@@ -3,6 +3,7 @@
 Este diretório deve conter todos os arquivos relacionados ao projeto eletrônico do robô *(categoria do robô)*, incluindo:
 
 - Esquemáticos eletrônicos
+  ! [Esquematico Eletronico](img/Esquematico Eletronico.png)
 - Layout de PCB
 - Lista de componentes (BOM)
   * planilha de componentes eletronicos (https://docs.google.com/spreadsheets/d/1agG4XEwVY7tFlbT6GtZfWE7ugiVqS48p61Cghws9TIE/edit?usp=sharing)
@@ -13,7 +14,7 @@ Este diretório deve conter todos os arquivos relacionados ao projeto eletrônic
   * Ponte H Dupla com Driver TB6612FNG
   * Bateria 7,4V 2200 mAh
   * Esp32 Devkit V1
-  * Regulador De Tensão Step Down
+  * Regulador De Tensão Step Down lm2596
   * 2 Rodas de Silicone
   * Switch
   
