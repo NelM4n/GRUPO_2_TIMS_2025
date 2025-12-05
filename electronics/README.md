@@ -3,8 +3,9 @@
 Este diretório deve conter todos os arquivos relacionados ao projeto eletrônico do robô *(categoria do robô)*, incluindo:
 
 - Esquemáticos eletrônicos
-  <img src="img/Esquematico Eletronico.png" alt="Esquemático do Projeto" width="100%">
+  <img src="img/EsquematicoEletronico_v2.png" alt="Esquemático do Projeto" width="100%">
 - Layout de PCB
+<img src="img/Rascunho layout PCI.png" alt="Esquemático do Projeto" width="100%">
 - Lista de componentes (BOM)
   * planilha de componentes eletronicos (https://docs.google.com/spreadsheets/d/1agG4XEwVY7tFlbT6GtZfWE7ugiVqS48p61Cghws9TIE/edit?usp=sharing)
   * Buzzer ativo 5V
