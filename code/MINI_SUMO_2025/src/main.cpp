@@ -1,6 +1,7 @@
 #include <Bluepad32.h>
 #include<Arduino.h>
 #include"funcoes.h"
+#include"buzzer.h"
 
 ControllerPtr myControllers[BP32_MAX_GAMEPADS];
 
@@ -146,6 +147,7 @@ void processGamepad(ControllerPtr ctl){
   }
   if (ctl->buttons() != 0x0001) {
     // code for when X button is released
+    wars();
   }
 
   //== PS4 Square button = 0x0004 ==//
