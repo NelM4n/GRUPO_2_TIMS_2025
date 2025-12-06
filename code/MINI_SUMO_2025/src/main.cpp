@@ -144,10 +144,13 @@ void processGamepad(ControllerPtr ctl){
   //== PS4 X button = 0x0001 ==//
   if (ctl->buttons() == 0x0001) {
     // code for when X button is pushed
+    wars();
   }
   if (ctl->buttons() != 0x0001) {
     // code for when X button is released
-    wars();
+
+    paraBuzzer();
+    
   }
 
   //== PS4 Square button = 0x0004 ==//
@@ -243,12 +246,16 @@ void processGamepad(ControllerPtr ctl){
 
   //== LEFT JOYSTICK - UP ==//
   if (ctl->axisY() <= -25) {
+
+    frente();
   
   }
 
   //== LEFT JOYSTICK - DOWN ==//
   if (ctl->axisY() >= 25) {
     // code for when left joystick is pushed down
+
+    re();
   }
 
   //== LEFT JOYSTICK - LEFT ==//
