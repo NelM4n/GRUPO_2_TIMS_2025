@@ -23,6 +23,8 @@ Este diretório deve conter todos os arquivos relacionados ao projeto eletrônic
 - Diagramas de conexão
  ![Diagramas de conexao dia 14/11](img/circuit_image.png)
 - Link para o diagram no Cirkit Designer IDE (https://app.cirkitdesigner.com/project/8090001e-82be-4ea8-86dd-e02c36172e6e)
+<img src="img/Circuito_Funcional_05_12.png" alt="Esquemático do Projeto" width="100%">
+
 - Link para o diagrama de circuito funcional do dia 05/12 no Cirkit Designer IDE (https://app.cirkitdesigner.com/project/1ce78cc2-e102-4804-a368-5a097970096b)
 - Configurações de hardware
 
