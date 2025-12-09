@@ -1,5 +1,6 @@
 #include <Bluepad32.h>
 #include<Arduino.h>
+#include<uni.h>
 #include"funcoes.h"
 #include"buzzer.h"
 
@@ -20,6 +21,7 @@ void dumpGamepad(ControllerPtr ctl);
 void processGamepad(ControllerPtr ctl);
 
 void processControllers();
+static const char * controller_addr_string = "14:CB:65:F9:B6:0A";
 
 void setup() {
 
@@ -31,6 +33,22 @@ void setup() {
   pinMode(BIN2, OUTPUT);
   pinMode(PWMB, OUTPUT);
   pinMode(STBY, OUTPUT);
+
+  
+    bd_addr_t controller_addr;
+
+    // Parse human-readable Bluetooth address.
+    sscanf_bd_addr(controller_addr_string, controller_addr);
+
+    // Notice that this address will be added in the Non-volatile-storage (NVS).
+    // If the device reboots, the address will still be stored.
+    // Adding a duplicate value will do nothing.
+    // You can add up to four entries in the allowlist.
+    uni_bt_allowlist_add_addr(controller_addr);
+
+    // Finally, enable the allowlist.
+    // Similar to the "add_addr", its value gets stored in the NVS.
+    uni_bt_allowlist_set_enabled(true);
 
   // Enable the motor driver by setting STBY HIGH
   digitalWrite(STBY, HIGH);
@@ -82,6 +100,7 @@ void onConnectedController(ControllerPtr ctl) {
       Serial.printf("CALLBACK: Controller is connected, index=%d\n", i);
       // Additionally, you can get certain gamepad properties like:
       // Model, VID, PID, BTAddr, flags, etc.
+      conectado();
       ControllerProperties properties = ctl->getProperties();
       Serial.printf("Controller model: %s, VID=0x%04x, PID=0x%04x\n", ctl->getModelName().c_str(), properties.vendor_id, properties.product_id);
       myControllers[i] = ctl;

@@ -139,6 +139,12 @@ int starWars[] = {
   NOTE_C6,1
   
 };
+
+void conectado(){
+  tone(buzzer, 1000); // Generate a 1kHz tone
+  delay(1000); // Play for 1 second
+  noTone(buzzer); // Stop the tone
+}
 void wars(){
 // sizeof gives the number of bytes, each int value is composed of two bytes (16 bits)
 // there are two values per note (pitch and duration), so for each note there are four bytes
