@@ -1,3 +1,5 @@
+/*Este é o arquivo main do mini robô sumô CLOUD feito para participar do campeonato interno 
+  do GRUPO DE ESTUDOS EM ROBÓTICA da UEA - GEAR*/
 #include <Bluepad32.h>
 #include<Arduino.h>
 #include<uni.h>
@@ -191,9 +193,15 @@ void processGamepad(ControllerPtr ctl){
   //== PS4 Circle button = 0x0002 ==//
   if (ctl->buttons() == 0x0002) {
     // code for when circle button is pushed
+
+    fantasy();
+
   }
   if (ctl->buttons() != 0x0002) {
     // code for when circle button is released
+
+    paraBuzzer();
+
   }
 
   //== PS4 Dpad UP button = 0x01 ==//

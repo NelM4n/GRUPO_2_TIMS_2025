@@ -140,11 +140,7 @@ int starWars[] = {
   
 };
 
-void conectado(){
-  tone(buzzer, 1000); // Generate a 1kHz tone
-  delay(1000); // Play for 1 second
-  noTone(buzzer); // Stop the tone
-}
+
 void wars(){
 // sizeof gives the number of bytes, each int value is composed of two bytes (16 bits)
 // there are two values per note (pitch and duration), so for each note there are four bytes
@@ -181,4 +177,31 @@ int divider = 0, noteDuration = 0;
     // stop the waveform generation before the next note.
     noTone(buzzer);
   }
+}
+int finalFantasy[] = {
+  NOTE_C5, NOTE_E5,NOTE_G5, NOTE_B5, // C5, E5, G5, B5
+  NOTE_C6, NOTE_B5, NOTE_G5, NOTE_E5, // C6, B5, G5, E5
+  NOTE_D6, NOTE_C6, NOTE_B5, NOTE_G5 // D6, C6, B5, G5
+};
+
+void fantasy(){ 
+
+  int noteDurations[] = {
+    8, 8, 8, 4,
+    8, 8, 8, 4,
+    8, 8, 8, 2
+  };
+
+  for (int i = 0; i < sizeof(finalFantasy) / sizeof(int); i++) {
+    int duration = 1000 / noteDurations[i];
+    tone(buzzer, finalFantasy[i], duration);
+    delay(duration * 1.3); // pause between notes
+  }
+
+}
+
+void conectado(){
+  tone(buzzer, 1000); // Generate a 1kHz tone
+  delay(1000); // Play for 1 second
+  noTone(buzzer); // Stop the tone
 }
