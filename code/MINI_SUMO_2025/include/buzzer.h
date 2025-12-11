@@ -179,9 +179,9 @@ int divider = 0, noteDuration = 0;
   }
 }
 int finalFantasy[] = {
-  NOTE_C5, NOTE_E5,NOTE_G5, NOTE_B5, // C5, E5, G5, B5
-  NOTE_C6, NOTE_B5, NOTE_G5, NOTE_E5, // C6, B5, G5, E5
-  NOTE_D6, NOTE_C6, NOTE_B5, NOTE_G5 // D6, C6, B5, G5
+  NOTE_C5, NOTE_E5,NOTE_G5, NOTE_B5, 
+  NOTE_C6, NOTE_B5, NOTE_G5, NOTE_E5, 
+  NOTE_D6, NOTE_C6, NOTE_B5, NOTE_G5 
 };
 
 void fantasy(){ 

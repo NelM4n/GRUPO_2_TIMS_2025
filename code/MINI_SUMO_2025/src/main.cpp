@@ -272,33 +272,33 @@ void processGamepad(ControllerPtr ctl){
   }
 
   //== LEFT JOYSTICK - UP ==//
-  if (ctl->axisY() <= -25) {
+  if (ctl->axisY() <= -100) {
 
     frente();
   
   }
 
   //== LEFT JOYSTICK - DOWN ==//
-  if (ctl->axisY() >= 25) {
+  if (ctl->axisY() >= 100) {
     // code for when left joystick is pushed down
 
     re();
   }
 
   //== LEFT JOYSTICK - LEFT ==//
-  if (ctl->axisX() <= -25) {
+  if (ctl->axisX() <= -100) {
     // code for when left joystick is pushed left
     esquerda();
   }
 
   //== LEFT JOYSTICK - RIGHT ==//
-  if (ctl->axisX() >= 25) {
+  if (ctl->axisX() >= 100) {
     // code for when left joystick is pushed right
     direita();
   }
 
   //== LEFT JOYSTICK DEADZONE ==//
-  if (ctl->axisY() > -25 && ctl->axisY() < 25 && ctl->axisX() > -25 && ctl->axisX() < 25) {
+  if (ctl->axisY() > -100 && ctl->axisY() < 100 && ctl->axisX() > 100 && ctl->axisX() < 100) {
     // code for when left joystick is at idle
   }
 
