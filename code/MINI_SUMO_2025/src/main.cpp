@@ -246,12 +246,12 @@ void processGamepad(ControllerPtr ctl){
 
   //== PS4 R2 trigger button = 0x0080 ==//
   if (ctl->buttons() == 0x0080) {
-    frente();
+   
   }
  
   if (ctl->buttons() != 0x0080) {
     // code for when R2 button is released
-     parado();
+  
   }
 
   //== PS4 L1 trigger button = 0x0010 ==//
@@ -264,41 +264,41 @@ void processGamepad(ControllerPtr ctl){
 
   //== PS4 L2 trigger button = 0x0040 ==//
   if (ctl->buttons() == 0x0040) {
-    re();
+  
   }
   if (ctl->buttons() != 0x0040) {
     // code for when L2 button is released
-    parado();
+    
   }
 
   //== LEFT JOYSTICK - UP ==//
-  if (ctl->axisY() <= -100) {
+  if (ctl->axisY() <= -400) {
 
     frente();
   
   }
 
   //== LEFT JOYSTICK - DOWN ==//
-  if (ctl->axisY() >= 100) {
+  if (ctl->axisY() >= 400) {
     // code for when left joystick is pushed down
 
     re();
   }
 
   //== LEFT JOYSTICK - LEFT ==//
-  if (ctl->axisX() <= -100) {
+  if (ctl->axisX() <= -400) {
     // code for when left joystick is pushed left
     esquerda();
   }
 
   //== LEFT JOYSTICK - RIGHT ==//
-  if (ctl->axisX() >= 100) {
+  if (ctl->axisX() >= 400) {
     // code for when left joystick is pushed right
     direita();
   }
 
   //== LEFT JOYSTICK DEADZONE ==//
-  if (ctl->axisY() > -100 && ctl->axisY() < 100 && ctl->axisX() > 100 && ctl->axisX() < 100) {
+  if (ctl->axisY() > -25 && ctl->axisY() < 25 && ctl->axisX() > 25 && ctl->axisX() < 25) {
     // code for when left joystick is at idle
   }
 

@@ -11,10 +11,10 @@ void frente() {
     Serial.print("Indo pra frente");
     analogWrite(PWMA, 255);
     analogWrite(PWMB, 255);
-    digitalWrite(AIN1, HIGH);
-    digitalWrite(AIN2, LOW);
-    digitalWrite(BIN1, HIGH);
-    digitalWrite(BIN2, LOW);  
+    digitalWrite(AIN1, LOW);
+    digitalWrite(AIN2, HIGH);
+    digitalWrite(BIN1, LOW);
+    digitalWrite(BIN2, HIGH);  
   }
   void parado() {
     Serial.print("Parado");
@@ -47,8 +47,8 @@ void frente() {
     Serial.print("Indo pra trás");
     analogWrite(PWMA, 255);
     analogWrite(PWMB, 255);
-    digitalWrite(AIN1, LOW);
-    digitalWrite(AIN2, HIGH);
-    digitalWrite(BIN1, LOW);
-    digitalWrite(BIN2, HIGH); 
+    digitalWrite(AIN1, HIGH);
+    digitalWrite(AIN2, LOW);
+    digitalWrite(BIN1, HIGH);
+    digitalWrite(BIN2, LOW); 
   }
