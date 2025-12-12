@@ -227,28 +227,43 @@ void processGamepad(ControllerPtr ctl){
   if (ctl->buttons() != 0x08) {
     // code for when dpad left button is released
   }
+// Use uma flag para saber se o robô se moveu
+  bool moved = false;
 
-  //== PS4 Dpad RIGHT button = 0x04 ==//
-  if (ctl->buttons() == 0x04) {
-    // code for when dpad right button is pushed
-  }
-  if (ctl->buttons() != 0x04) {
-    // code for when dpad right button is released
-  }
+  // Defina a deadzone para um valor (ex: 100)
+  const int DEADZONE = 100;
 
-  //== PS4 R1 trigger button = 0x0020 ==//
-  if (ctl->buttons() == 0x0020) {
-    // code for when R1 button is pushed
-  }
-  if (ctl->buttons() != 0x0020) {
-    // code for when R1 button is released
+  //== LEFT JOYSTICK - UP ==//
+  if (ctl->axisY() <= -400) {
+    frente();
+    moved = true;
   }
 
-  //== PS4 R2 trigger button = 0x0080 ==//
-  if (ctl->buttons() == 0x0080) {
-   
+  //== LEFT JOYSTICK - DOWN ==//
+  else if (ctl->axisY() >= 400) {
+    re();
+    moved = true;
   }
- 
+
+  //== LEFT JOYSTICK - LEFT ==//
+  else if (ctl->axisX() <= -400) {
+    esquerda();
+    moved = true;
+  }
+
+  //== LEFT JOYSTICK - RIGHT ==//
+  else if (ctl->axisX() >= 400) {
+    direita();
+    moved = true;
+  }
+
+  //== LEFT JOYSTICK DEADZONE ==//
+  // Se não houver movimento significativo em X ou Y, pare o robô.
+  if (!moved && ctl->axisY() > -DEADZONE && ctl->axisY() < DEADZONE && 
+      ctl->axisX() > -DEADZONE && ctl->axisX() < DEADZONE) {
+    parado();
+  }
+  
   if (ctl->buttons() != 0x0080) {
     // code for when R2 button is released
   
@@ -298,8 +313,10 @@ void processGamepad(ControllerPtr ctl){
   }
 
   //== LEFT JOYSTICK DEADZONE ==//
-  if (ctl->axisY() > -25 && ctl->axisY() < 25 && ctl->axisX() > 25 && ctl->axisX() < 25) {
+  if (ctl->axisY() > -100 && ctl->axisY() < 100 && ctl->axisX() > 100 && ctl->axisX() < 100
+) {
     // code for when left joystick is at idle
+    parado();
   }
 
   //== RIGHT JOYSTICK - X AXIS ==//
