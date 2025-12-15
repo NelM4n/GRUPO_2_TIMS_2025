@@ -14,7 +14,7 @@ Este diretório contém todos os arquivos relacionados ao projeto eletrônico do
 | Bateria 7,7V (2x Células de Lítio em Série) | Fonte de energia principal para todo o sistema. |
 | Regulador De Tensão Step Down LM2596 | Converte 7,7V para 5V, alimentando o ESP32|
 | Switch | Interruptor principal de energia. |
-| Barra de pinos | Conectores para fácil prototipagem e interligação. |
+| Barra de pinos | Conectores para fácil interligação. |
 | 2 Motores N20 | Motores de corrente contínua para propulsão. |
 | 2 Rodas de Silicone | Acoplamento aos motores para locomoção. |
 | Placa Universal | Base para montagem dos componentes eletrônicos. |
@@ -27,7 +27,7 @@ Este diretório contém todos os arquivos relacionados ao projeto eletrônico do
 | Título | Imagem | 
 | :--- | :--- | 
 | **Diagrama de Conexões (Versão Final)** | <img src="img/Diagramas de conexões (Versão Final).png" alt="Diagramas de conexões (Versão Final)" width="100%"> |
-| **Diagrama de Conexões Sem ESP32** | <img src="img/Circuito Eletrônico Sem ESP32 (Versão Final).png" alt="Diagramas de Conexões Sem ESP32 (Versão Final)" width="100%"> |
+| **Diagrama de Conexões Sem ESP32** | <img src="img/Circuito eletronico Sem ESP32 (Versão FInal).png" alt="Diagramas de Conexões Sem ESP32 (Versão Final)" width="100%"> |
 
 **Cirkit Designer (Diagrama Final 12/12)** |[ Link para Visualização do Diagramas de Conexões no site do Cirkit](https://app.cirkitdesigner.com/project/8f864acf-6e72-45a9-822b-39d40fed3360) |
 
@@ -38,8 +38,8 @@ Este diretório contém todos os arquivos relacionados ao projeto eletrônico do
 |**Layout de PCB (Rascunho)** | <img src="img/Rascunho layout PCI.png" alt="Esquemático do Projeto" width="100%"> |
 
 
-## 4. Diagramas de Pinout
-| Pino do ESP32 | Componente Conectado | Pino do Componente | Função |
+## 4. Tabelas de Pinout
+| Pino da ESP32 | Componente Conectado | Pino do Componente | Função |
 | :--- | :--- | :--- | :--- |
 | **Vin** | StepDownLM2596, TB6612FNG | Vout, VM | Alimentação lógica (Tensão regulada). |
 | **GND** | StepDownLM2596, TB6612FNG, Buzzer | GND | Referência de terra comum. |
@@ -54,12 +54,11 @@ Este diretório contém todos os arquivos relacionados ao projeto eletrônico do
 
 | Componente | Pino | Conexão de Saída/Entrada | Destino |
 | :--- | :--- | :--- | :--- |
-| **Bateria**| **IN+** | Saída de tensão bruta| Toggle Switch (L2) |
-| **Bateria** | **GND** | Referência de terra | StepDownLM2596 (Gnd) |
-| **Toggle Switch** | **COM** | Tensão com chaveamento (liga/desliga) | StepDownLM2596 (Vin) |
-| **StepDownLM2596** | **Vin** | Entrada de tensão (do Switch) | Toggle Switch (COM) |
-| **StepDownLM2596** | **Gnd** | Terra Comum | Bateria (GND), ESP32 (GND), TB6612FNG (GND) |
-| **StepDownLM2596** | **Vout** | Tensão regulada 5V | ESP32 (Vin) e TB6612FNG (VM) |
+| **Bateria**| **IN+** | Saída de tensão bruta| Toggle Switch **(L2)** |
+| **Bateria** | **GND** | Referência de terra | StepDownLM2596 **(IN-)** |
+| **Toggle Switch** | **COM** | Tensão com chaveamento (liga/desliga) | StepDownLM2596 **(IN+)** |
+| **StepDownLM2596** | **OUT-** | Terra Comum | ESP32 **(GND)** |
+| **StepDownLM2596** | **OUT+** | Tensão regulada 5V | ESP32 **(Vin)**|
 ## Documentação
 
 Neste README deve conter as instruções de uso, pinos utilizados e explicação do circuito.
