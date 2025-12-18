@@ -1,3 +1,4 @@
+/*Neste arquivo vão as funções e músicas para o buzzer*/
 /* 
   Star Wars theme  
   Connect a piezo buzzer or speaker to pin 11 or select a new pin.
@@ -195,13 +196,13 @@ void fantasy(){
   for (int i = 0; i < sizeof(finalFantasy) / sizeof(int); i++) {
     int duration = 1000 / noteDurations[i];
     tone(buzzer, finalFantasy[i], duration);
-    delay(duration * 1.3); // pause between notes
+    delay(duration * 1.3); // pausa entre as notas
   }
 
 }
 
 void conectado(){
-  tone(buzzer, 1000); // Generate a 1kHz tone
-  delay(1000); // Play for 1 second
-  noTone(buzzer); // Stop the tone
+  tone(buzzer, 1000); //Gera um tom de 1khz
+  delay(1000); // Executa por um segundo
+  noTone(buzzer); // Para
 }

@@ -1,3 +1,4 @@
+/*Neste aquivo vão as funções para movimento*/
 #include<Arduino.h>
 #define AIN1 13
 #define BIN1 12
