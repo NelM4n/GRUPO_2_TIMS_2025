@@ -4,9 +4,13 @@ Este diretório deve conter todos os arquivos relacionados ao projeto mecânico 
 
 - Arquivos CAD 3D
 - Desenhos técnicos
-  * Desenhos técnicos ![Imagem do Chassi em vista direita (tampa aberta)](./img/Print_ChassiV3_.jpeg)
+  * Desenhos técnicos ![Imagem do Chassi em vista direita (tampa aberta)](./img/Print_Chassi_DEF.png)
 - Arquivos para impressão 3D
-- Listas de materiais
+- Listas de materiais:
+* 9x Parafusos  
+* 2x Rolamentos (utilizados como pesos)  
+* 2x Suportes de motor N20  
+
 - Guias de montagem mecânica
 - Especificações de peças
 
