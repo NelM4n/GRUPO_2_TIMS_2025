@@ -7,9 +7,14 @@ Este diretório deve conter todos os arquivos relacionados ao projeto mecânico 
   * Desenhos técnicos ![Imagem do Chassi em vista direita (tampa aberta)](./img/Print_Chassi_DEF.png)
 - Arquivos para impressão 3D
 - Listas de materiais:
-  * 9x Parafusos  
-  * 2x Rolamentos (utilizados como pesos)  
-  * 2x Suportes de motor N20  
+  ##(BOM)
+
+| Item | Descrição                         | Quantidade | Observações                    |
+|------|----------------------------------|------------|--------------------------------|
+| 1    | Parafuso                          | 9          | --                             |
+| 2    | Rolamento                         | 2          | Utilizados como pesos          |
+| 3    | Suporte de motor N20              | 2          | —                              |
+
 
 - Guias de montagem mecânica
 - Especificações de peças
