@@ -7,7 +7,7 @@ Este diretório deve conter todos os arquivos relacionados ao projeto mecânico 
   * Desenhos técnicos ![Imagem do Chassi em vista direita (tampa aberta)](./img/Print_Chassi_DEF.png)
 - Arquivos para impressão 3D
 - Listas de materiais:
-  ##(BOM)
+  *(BOM)
 
 | Item | Descrição                         | Quantidade | Observações                    |
 |------|----------------------------------|------------|--------------------------------|
