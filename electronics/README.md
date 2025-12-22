@@ -18,7 +18,7 @@ Este diretório contém todos os arquivos relacionados ao projeto eletrônico do
 | 2 Motores N20 | Motores de corrente contínua para propulsão. |
 | 2 Rodas de Silicone | Acoplamento aos motores para locomoção. |
 | Placa Universal | Base para montagem dos componentes eletrônicos. |
-| Buzzer ativo 5V | Sinalização sonora e feedback de status. |
+| Buzzer passivo 5V | Sinalização sonora e feedback de status. |
 |2 Conectores Borne 2 vias | Dispositivos que permitem a conexão elétrica entre diferentes fios ou cabos.
 
 
