@@ -17,6 +17,7 @@ MINI_SUMO_2025/
 │
 ├── misc/                       # Miscelânea
 │
-│
+├── simu/                       # Simulação
+|
 └── README.md --> ESTE ARQUIVO  # Resumo geral dos diretórios
 ```
