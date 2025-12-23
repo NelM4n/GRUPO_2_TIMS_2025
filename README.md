@@ -1,8 +1,8 @@
-# Robô Minu-sumô CLOUD
+# Robô Mini-sumô CLOUD
 
 ## Estrutura do Projeto
 
-Este template fornece uma estrutura organizada para desenvolvimento do robô Sumô Cloud, com diretorios específicos para cada aspecto do projeto:
+Este template fornece uma estrutura organizada para desenvolvimento do robô mini-sumô Cloud, com diretorios específicos para cada aspecto do projeto:
 
 ## Organização dos Diretórios
 ```
