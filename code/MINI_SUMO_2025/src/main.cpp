@@ -26,9 +26,6 @@ void processGamepad(ControllerPtr ctl);
 void processControllers();
 static const char * controller_addr_string = "14:CB:65:F9:B6:0A";
 
-const int DEADZONE = 100;
-bool moved = false;
-
 void setup() {
 
   Serial.begin(115200);
@@ -39,7 +36,8 @@ void setup() {
   pinMode(BIN2, OUTPUT);
   pinMode(PWMB, OUTPUT);
   pinMode(STBY, OUTPUT);
-   
+
+  
     bd_addr_t controller_addr;
 
     // Parse human-readable Bluetooth address.
@@ -166,8 +164,6 @@ void processGamepad(ControllerPtr ctl){
   //  a(), b(), x(), y(), l1(), etc...
  
   //== PS4 X button = 0x0001 ==//
-
-  
   if (ctl->buttons() == 0x0001) {
     // code for when X button is pushed
     wars();
@@ -232,9 +228,13 @@ void processGamepad(ControllerPtr ctl){
   if (ctl->buttons() != 0x08) {
     // code for when dpad left button is released
   }
+//flag para saber se o robô se moveu
+  bool moved = false;
+
+  //deadzone
+  const int DEADZONE = 100;
 
   //== LEFT JOYSTICK - UP ==//
-  //flags adicionadas para saber se o robô se moveu
   if (ctl->axisY() <= -400) {
     frente();
     moved = true;
@@ -259,7 +259,7 @@ void processGamepad(ControllerPtr ctl){
   }
 
   //== LEFT JOYSTICK DEADZONE ==//
-  // Se não houver movimento significativo em X ou Y, o robô para.
+  // Se não houver movimento significativo em X ou Y, pare o robô.
   if (!moved && ctl->axisY() > -DEADZONE && ctl->axisY() < DEADZONE && 
       ctl->axisX() > -DEADZONE && ctl->axisX() < DEADZONE) {
     parado();
@@ -286,6 +286,40 @@ void processGamepad(ControllerPtr ctl){
     // code for when L2 button is released
     
   }
+
+  //== LEFT JOYSTICK - UP ==//
+  if (ctl->axisY() <= -400) {
+
+    frente();
+  
+  }
+
+  //== LEFT JOYSTICK - DOWN ==//
+  if (ctl->axisY() >= 400) {
+    // code for when left joystick is pushed down
+
+    re();
+  }
+
+  //== LEFT JOYSTICK - LEFT ==//
+  if (ctl->axisX() <= -400) {
+    // code for when left joystick is pushed left
+    esquerda();
+  }
+
+  //== LEFT JOYSTICK - RIGHT ==//
+  if (ctl->axisX() >= 400) {
+    // code for when left joystick is pushed right
+    direita();
+  }
+
+  //== LEFT JOYSTICK DEADZONE ==//
+  if (ctl->axisY() > -100 && ctl->axisY() < 100 && ctl->axisX() > 100 && ctl->axisX() < 100
+) {
+    // code for when left joystick is at idle
+    parado();
+  }
+
   //== RIGHT JOYSTICK - X AXIS ==//
   if (ctl->axisRX()) {
     // code for when right joystick moves along x-axis
